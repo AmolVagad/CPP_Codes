@@ -6,6 +6,9 @@
 using namespace std;
 void PrintList(struct Node *n);
 void PrintListAll(struct Node *n);
+void PushNewHead(struct Node** head_ref, int new_data);
+void PushNewTail(struct Node** tail_ref, int new_data);
+
 // Creating the node structure
 struct Node
 {
@@ -45,6 +48,21 @@ int main()
 
 	//Function call to print data from the entire list
 	PrintListAll(head);
+	
+	//Function call to add a new head
+	PushNewHead(&head, 0);
+
+	//Print new list after the addition 
+	cout<<"The new list after addition of new head"<<endl;
+	PrintListAll(head);
+
+
+	//Function call to add new tail
+	PushNewTail(&head, 6);
+
+	//Print new list after the addition 
+        cout<<"The new list after addition of new tail"<<endl;
+        PrintListAll(center);
 
 	return 0;
  }
@@ -69,4 +87,52 @@ void PrintListAll(struct Node *m)
 		m = m->next;
 		count++;
 	}
+	count = 0;
 }
+
+
+
+
+// Pushing a new node to make it the new head 
+void PushNewHead(struct Node** head_ref, int new_data)
+{
+
+	//Allocate memory to new node
+	struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
+
+	//Insert data
+	new_node->data = new_data;
+	//Point to the head
+
+	new_node->next = (*head_ref);
+
+	//Move head to new node
+	*head_ref = new_node;
+}
+
+
+// Push a new node to make it the new tail 
+
+
+void PushNewTail(struct Node** tail_ref, int new_data)
+{
+
+        //Allocate memory to new node
+        struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
+
+	struct Node *last = *tail_ref;
+        //Insert data
+        new_node->data = new_data;
+        //Point to NULL 
+
+        new_node->next = NULL;
+
+        //Traverse till last node
+        while(last->next != NULL)
+	{
+		last = last->next;
+	}
+return;
+
+}
+
